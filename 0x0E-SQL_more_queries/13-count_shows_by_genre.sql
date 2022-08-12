@@ -1,2 +1,10 @@
--- lists all shows, and all genres linked to that show, from the database hbtn_0d_tvshows
-SELECT a.title, c.name FROM tv_shows a LEFT JOIN tv_show_genres b ON a.id = b.show_id LEFT JOIN tv_genres c ON b.genre_id = c.id ORDER BY a.title ASC, c.name ASC;
+-- Script that lists all genres from hbtn_0d_tvshows and displays the number of shows linked to each
+SELECT	genres.name
+AS 	genre,
+COUNT(show_gen.show_id) AS number_of_shows
+FROM	tv_genres
+AS	genres
+INNER JOIN tv_show_genres AS show_gen
+ON genres.id = show_gen.genre_id
+GROUP BY genre
+ORDER BY number_of_shows DESC;
